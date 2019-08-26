@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Hunter Rodriguez</title>
-    <link>https://wmhunter96.github.io/hunterrodriguez.github.io/</link>
+    <link>https://hunterrodriguez.com/</link>
     <description>Recent content on Hunter Rodriguez</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
     <lastBuildDate>Sun, 25 Aug 2019 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://wmhunter96.github.io/hunterrodriguez.github.io/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://hunterrodriguez.com/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Gear</title>
-      <link>https://wmhunter96.github.io/hunterrodriguez.github.io/gear/</link>
+      <link>https://hunterrodriguez.com/gear/</link>
       <pubDate>Sun, 25 Aug 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://wmhunter96.github.io/hunterrodriguez.github.io/gear/</guid>
+      <guid>https://hunterrodriguez.com/gear/</guid>
       <description>Desktop Custom Build Windows 10 Specs
  Intel CPU 000 3.2GHz (8 CPUs) 1TB SSD, 1TB HDD, 500GB HDD NVIDIA GeForce GTX 960 16GB RAM ASUS P6T Deluxe Motherboard Antec 850W  Laptop (primary) DELL XPS 9560 Windows 10 Specs
  Intel i7-7700HQ 512GB SSD GTX 1050 16GB RAM FHD Matte 15.6&amp;rdquo; Display  Laptop (secondary) Lenovo Y510P Windows 10 Specs
@@ -25,19 +25,19 @@
     
     <item>
       <title>Projects</title>
-      <link>https://wmhunter96.github.io/hunterrodriguez.github.io/projects/</link>
+      <link>https://hunterrodriguez.com/projects/</link>
       <pubDate>Sun, 25 Aug 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://wmhunter96.github.io/hunterrodriguez.github.io/projects/</guid>
+      <guid>https://hunterrodriguez.com/projects/</guid>
       <description>Under Construction</description>
     </item>
     
     <item>
       <title>Resume</title>
-      <link>https://wmhunter96.github.io/hunterrodriguez.github.io/resume/</link>
+      <link>https://hunterrodriguez.com/resume/</link>
       <pubDate>Sun, 25 Aug 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://wmhunter96.github.io/hunterrodriguez.github.io/resume/</guid>
+      <guid>https://hunterrodriguez.com/resume/</guid>
       <description>William Hunter Rodriguez 626.205.5675 | acehunter96@gmail.com
 Education University of California Santa Cruz: Earth Science Major - expected graduation June 2020  College Engineering courses taken: Computer Systems and Assembly Language, Computer Systems and C Programming, Applied Discrete Mathematics, Mathematical Methods for Engineers I&amp;amp;II, Introduction to Computer Networks College Math courses taken: Calculus, Vector Calculus College Economics courses taken: Microeconomics, Macroeconomics  Skills  Programming: C, R, Java, Lua, Python, HTML, CSS, Assembly, Bash Microcontrollers/Microprocessors: Raspberry Pi, Arduino, PIC32, Jetson TX1 Microsoft Office: Excel, Word, Access, Powerpoint, etc.</description>
     </item>
