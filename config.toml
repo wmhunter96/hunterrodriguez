@@ -75,7 +75,7 @@ disableHugoGeneratorInject = false
   contentTypeName = "posts"
   # Default theme "light" or "dark"
   defaultTheme = "dark"
-  themeColor = "#252627"
+  themeColor = "#db0b0b"
 
   [params.logo]
     logoText     = "$ cd /home/"
