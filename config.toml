@@ -58,7 +58,7 @@ disableHugoGeneratorInject = false
   keywords = ""
   images = [""]
 
-  homeSubtitle = "Innovation of Tomorrow"
+  homeSubtitle = "Innovation of Tomorrow!"
 
   # Prefix of link to the git commit detail page. GitInfo must be enabled.
   # gitUrl = ""
@@ -119,3 +119,7 @@ disableHugoGeneratorInject = false
     identifier = "gear"
     name       = "Gear"
     url        = "gear/"
+  [[menu.main]]
+    identifier = "posts"
+    name       = "Posts"
+    url        = "posts/"
