@@ -1,3 +1,7 @@
+---
+title: "harvesting"
+date: "2019-08-28T10:34:00-4:00"
+---
 ### Intro:
 So you want to harvest 18650 cells. 18650 cells are readily available and commonly found in most laptop batteries as well as power-tool battery packs. With an average voltage of 3.7V per cell and capacities ranging from .5Ah - 3Ah, these cells are very versatile and suitable for most of your projects in need of battery power.
 

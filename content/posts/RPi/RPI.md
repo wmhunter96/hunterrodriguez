@@ -1,3 +1,7 @@
+---
+title: "RPI"
+date: "2019-08-28T10:34:00-4:00"
+---
 ### Intro:
 So you just purchased a Raspberry Pi, the first thing that you need to do before you can boot it up is install the OS (Operating System).
 

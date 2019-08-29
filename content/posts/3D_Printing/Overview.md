@@ -1,3 +1,7 @@
+---
+title: "Overview"
+date: "2019-08-28T10:34:00-4:00"
+---
 ### Intro
 So you just purchased a 3D Printer, let's quickly go over how it works, how it's different than other CNC machines, and why it's so cool!
 

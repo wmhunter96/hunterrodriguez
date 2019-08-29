@@ -1,3 +1,7 @@
+---
+title: "Packing"
+date: "2019-08-28T10:34:00-4:00"
+---
 ### Intro:
 There are three main ways to assemble cells into battery packs.
 

@@ -1,3 +1,7 @@
+---
+title: "Capacity"
+date: "2019-08-28T10:34:00-4:00"
+---
 ### Intro:
 Now you have a bunch of "good" cells what do you do now? The next step is to test exactly how good each cell is.
 

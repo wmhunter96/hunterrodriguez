@@ -1,3 +1,7 @@
+---
+title: "Applications"
+date: "2019-08-28T10:34:00-4:00"
+---
 ### Intro:
 So now that you have a bunch of good 18650 cells with confirmed capacities what can you do with them?
 

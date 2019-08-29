@@ -1,3 +1,7 @@
+---
+title: "Octoprint"
+date: "2019-08-28T10:34:00-4:00"
+---
 ### Intro
 Octoprint is a web interface for your 3D Printer that lets you control everything from your X, Y, Z position to extrusion to your webcam.
 ### Installation
