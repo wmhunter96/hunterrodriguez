@@ -120,6 +120,6 @@ disableHugoGeneratorInject = false
     name       = "Gear"
     url        = "gear/"
   [[menu.main]]
-    identifier = "posts"
-    name       = "Posts"
-    url        = "posts/"
+    identifier = "data"
+    name       = "Data"
+    url        = "data/"
