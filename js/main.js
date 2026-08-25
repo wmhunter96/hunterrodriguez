@@ -27,3 +27,13 @@ if (toggleExperience && extraExperience.length) {
     toggleExperience.textContent = isExpanded ? 'Show full experience' : 'Show less';
   });
 }
+
+// Export resume to PDF via the browser's print dialog. The .extra-experience
+// entries are always omitted from the export (see the print styles in
+// css/style.css), regardless of whether they're currently shown on-page.
+var exportPdfBtn = document.getElementById('exportPdf');
+if (exportPdfBtn) {
+  exportPdfBtn.addEventListener('click', function () {
+    window.print();
+  });
+}
