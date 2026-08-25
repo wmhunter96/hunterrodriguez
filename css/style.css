@@ -105,6 +105,10 @@ body {
 .page-intro { color: var(--fg-muted); max-width: 60ch; margin-bottom: 2.5rem; }
 .page-actions { margin-bottom: 2.5rem; }
 
+.page-header-row { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; flex-wrap: wrap; }
+.page-header-row h1 { margin-bottom: 0; }
+.btn-icon { display: inline-flex; align-items: center; gap: .5rem; white-space: nowrap; }
+
 /* Name/contact header shown only in the PDF export — see @media print below */
 .print-header { display: none; }
 
@@ -208,7 +212,7 @@ body {
   .site-header,
   .site-footer,
   .page-actions,
-  .page > h1 { display: none !important; }
+  .page-header-row { display: none !important; }
 
   .timeline .extra-experience { display: none !important; }
 
