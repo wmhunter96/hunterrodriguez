@@ -123,8 +123,10 @@ body {
 .page-header-row { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; flex-wrap: wrap; }
 .page-header-row h1 { margin-bottom: 0; }
 
-/* Name/contact header shown only in the PDF export — see @media print below */
-.print-header { display: none; }
+/* Name/contact header, and condensed Education/Experience content, shown
+   only in the PDF export — see @media print below. The on-screen sections
+   keep their fuller content; these are a parallel, print-only rendering. */
+.print-header, .print-only { display: none; }
 
 .page h2 { font-size: 1.4rem; margin: 0 0 1rem; padding-top: 2rem; border-top: 1px solid var(--border); }
 /* Each section is wrapped in .resume-block so print can reorder them (see
@@ -210,15 +212,21 @@ body {
 }
 
 /* Print (used by the resume's "Export to PDF" button, via window.print()).
-   Matches the format of the reference Word resume (Resume.docx): Arial,
-   Letter page with .5in top / 1in other margins, centered plain name +
-   email header, plain bold black section labels (no border/accent/
-   uppercase), and real nested bullets (● level 0, ○ level 1, ■ level 2)
-   instead of the site's colored timeline rule/dots. Section order is
-   reordered to match the docx (Education, Skills, Awards, Invention
-   Disclosures, Experience last) via flex order, independent of the
-   on-screen order. Always omits the full-experience entries, regardless
-   of whether they're currently expanded. */
+   Matches the format of a real resume export (Resume Northrop Grumman '25.pdf,
+   confirmed against the actual PDF rather than guessed): Arial, Letter page
+   with .5in margins, centered name/contact/clearance header with a real
+   hyperlinked email, plain bold black section labels (no border/accent/
+   uppercase), and real nested bullets (● level 0, ○ level 1, ■ level 2).
+
+   That reference is a condensed, single-employer resume — no role split, no
+   separate Invention Disclosures/Awards sections, no coursework line, no
+   older jobs, and a two-column <dl> can't render "label: value" on one
+   printed line the way this needs (a block-level <dt> always forces a line
+   break after itself). Rather than condense the on-screen page itself, the
+   condensed Education/Skills/Experience content lives in parallel
+   .print-only blocks (see resume.html) that are hidden on screen and shown
+   only here; the on-screen .resume-block sections they replace are hidden
+   in print instead of reordered. */
 /* Zero out the browser's own print margins so .page's padding below is the
    only margin in effect — otherwise it stacks on top of whatever margin
    the user's print dialog happens to be set to. */
@@ -246,23 +254,33 @@ body {
   .page-header-row,
   .page-intro { display: none !important; }
 
-  .timeline .extra-experience { display: none !important; }
+  /* Replaced by the condensed .print-only content below. */
+  .resume-block--experience,
+  .resume-block--education,
+  .resume-block--skills,
+  .resume-block--disclosures,
+  .resume-block--awards { display: none !important; }
 
-  .page { display: flex; flex-direction: column; padding: .5in 1in 1in; max-width: none; }
-  .resume-block--education   { order: 1; }
-  .resume-block--skills      { order: 2; }
-  .resume-block--awards      { order: 3; }
-  .resume-block--disclosures { order: 4; }
-  .resume-block--experience  { order: 5; }
+  .page { display: flex; flex-direction: column; padding: .5in; max-width: none; }
+  .print-only { display: block; }
+  .print-education  { order: 1; }
+  .print-skills     { order: 2; }
+  .print-experience { order: 3; }
   /* Education prints first (order 1 above); drop the extra top gap the
      general h2 rule below adds for every other section. */
-  .resume-block--education > h2 { margin-top: 0; }
+  .print-education > h2 { margin-top: 0; }
+  /* "Education:", "Skills:", "Experience:" all take a trailing colon. */
+  .print-skills > h2::after,
+  .print-experience > h2::after { content: ":"; }
 
   a { color: inherit; text-decoration: none; }
 
   .print-header { display: block; text-align: center; margin-bottom: 12pt; }
-  .print-header h1 { font-size: 16pt; font-weight: 700; margin: 0 0 4pt; }
-  .print-header p { font-size: 10pt; margin: 0; }
+  .print-header h1 { font-size: 18pt; font-weight: 700; margin: 0 0 4pt; }
+  .print-header p { font-size: 10pt; margin: 0 0 2pt; }
+  /* Unlike every other print link, the header email is a real, visibly
+     clickable hyperlink — blue/underlined, matching the reference export. */
+  .print-header a { color: #1155cc; text-decoration: underline; }
 
   .page h2 {
     font-size: 10pt;
@@ -273,87 +291,53 @@ body {
     margin: 12pt 0 4pt;
   }
 
-  /* Plain 9pt body text everywhere by default; specific elements below
+  /* Plain 10pt body text everywhere by default; specific elements below
      layer on their bullet level and indent. */
-  .page h3, .meta, .page p, .edu p,
-  .timeline li ul li, .disclosure-list li, .list-plain li,
-  .spec-grid dt, .spec-grid dd {
-    font-size: 9pt;
+  .page p, .page li {
+    font-size: 10pt;
     font-weight: 400;
     color: #000;
   }
 
-  .timeline { border-left: none; margin: 0; padding: 0; list-style: none; }
-  .timeline li { padding: 0; margin: 0 0 4pt; position: static; }
-  .timeline li::before { content: none; }
-  .timeline li ul { margin: 0; padding: 0; list-style: none; color: #000; }
-  .timeline li ul li { position: static; padding: 0; }
-  .timeline li ul li::before { content: none; }
-
-  /* Level 0 (●): job titles, school name, and this page's flat award/
-     disclosure lists — the reference resume's top-level bullets. */
-  .timeline > li > h3,
-  .edu > h3,
-  .disclosure-list li,
+  /* Level 0 (●): this page's flat award list (no other on-screen section
+     reaches print unreplaced — Education/Skills/Experience/Disclosures are
+     the .print-only versions). */
   .list-plain li {
     font-weight: 400;
     padding-left: .5in;
     text-indent: -.25in;
     margin: 0;
   }
-  .timeline > li > h3::before,
-  .edu > h3::before,
-  .disclosure-list li::before,
   .list-plain li::before { content: "\25CF  "; }
-  .disclosure-list .tag { display: none; }
+  .list-plain { list-style: none; margin: 0 0 4pt; padding: 0; }
 
-  /* Date/meta line: a continuation of the level-0 line above it, not its
-     own bullet — aligned under that line's text, not its bullet glyph. */
-  .meta, .timeline .meta {
-    padding-left: .5in;
-    text-indent: 0;
-    margin: 0 0 2pt;
-  }
+  /* Condensed Education: "Education: <school> – <degree>, <date>" on one
+     line — the h2 label and the paragraph both go inline so they share it.
+     Making the h2 inline drops the block-level top/bottom margin the other
+     section headers get from the general .page h2 rule above, so it's
+     restored here on the section itself instead. */
+  .print-education { margin: 0 0 6pt; }
+  .print-education h2 { display: inline; margin: 0; padding: 0; border: none; }
+  .print-education h2::after { content: ": "; }
+  .print-education p { display: inline; margin: 0; }
 
-  /* Level 1 (○): workstream categories, bullets with no workstream
-     wrapper, and the education coursework line. */
-  .timeline .workstream h4,
-  .timeline > li > ul > li,
-  .edu > p:not(.meta) {
+  /* Condensed Experience: a plain nested bullet list (company > category >
+     item) instead of the site's styled timeline/workstream markup. Every
+     li gets the same relative indent/hang; nesting three deep naturally
+     compounds that into the .5in/1in/1.5in absolute levels. */
+  .print-timeline, .print-timeline ul { list-style: none; margin: 0; padding: 0; }
+  .print-timeline li {
     font-weight: 400;
-    padding-left: 1in;
-    text-indent: -.25in;
-    margin: 0 0 2pt;
-  }
-  .timeline .workstream h4::before,
-  .timeline > li > ul > li::before,
-  .edu > p:not(.meta)::before { content: "\25CB  "; }
-
-  /* Level 2 (■): specific bullets nested inside a workstream category. */
-  .timeline .workstream > ul > li {
-    padding-left: 1.5in;
-    text-indent: -.25in;
-    margin: 0 0 2pt;
-  }
-  .timeline .workstream > ul > li::before { content: "\25A0  "; }
-
-  /* Skills grid -> flat "Category: items" bulleted lines, like the docx. */
-  .spec-grid { display: block; margin: 0; }
-  .spec-grid dt {
-    display: block;
-    text-transform: none;
-    letter-spacing: normal;
-    font-weight: 700;
     padding-left: .5in;
     text-indent: -.25in;
-    margin: 0;
+    margin: 0 0 2pt;
   }
-  .spec-grid dt::before { content: "\25CF  "; font-weight: 400; }
-  .spec-grid dt::after { content: ": "; font-weight: 400; }
-  .spec-grid dd { display: inline; margin: 0; font-weight: 400; }
-
-  .disclosure-list, .list-plain { list-style: none; margin: 0 0 4pt; padding: 0; }
-  .disclosure-list li { display: block; border-bottom: none; }
+  /* Extra breathing room between top-level entries (distinct roles),
+     versus the tighter 2pt between bullets within one. */
+  .print-timeline > li { margin-bottom: 6pt; }
+  .print-timeline > li::before { content: "\25CF  "; }
+  .print-timeline > li > ul > li::before { content: "\25CB  "; }
+  .print-timeline > li > ul > li > ul > li::before { content: "\25A0  "; }
 
   .card, .skill-tags li { border: none; background: none; padding: 0; }
 }
