@@ -93,11 +93,44 @@ body {
 .page-intro { color: var(--fg-muted); max-width: 60ch; margin-bottom: 2.5rem; }
 .page-actions { margin-bottom: 2.5rem; }
 
-.timeline { list-style: none; padding: 0; border-left: 2px solid var(--border); margin: 0 0 0 .5rem; }
+.page h2 { font-size: 1.4rem; margin: 0 0 1rem; padding-top: 2rem; border-top: 1px solid var(--border); }
+.page h2:first-of-type { border-top: none; padding-top: 0; }
+.page h3 { font-size: 1.05rem; margin: 0 0 .25rem; }
+.meta { color: var(--fg-muted); font-size: .85rem; margin: 0 0 .5rem; }
+
+.timeline { list-style: none; padding: 0; border-left: 2px solid var(--border); margin: 0 0 2.5rem .5rem; }
 .timeline li { padding: 0 0 2rem 1.5rem; position: relative; }
 .timeline li::before { content: ""; position: absolute; left: -7px; top: 4px; width: 12px; height: 12px; border-radius: 50%; background: var(--accent); }
 .timeline h3 { margin: 0 0 .25rem; font-size: 1.05rem; }
 .timeline .meta { color: var(--fg-muted); font-size: .85rem; margin-bottom: .5rem; }
+
+/* Bulleted detail lists inside a timeline entry (not new timeline stops,
+   so they're reset back to plain static list items) */
+.timeline li ul { margin: .5rem 0 0; padding-left: 1.2rem; list-style: disc; color: var(--fg-muted); }
+.timeline li ul li { position: static; padding: 0 0 .35rem; }
+.timeline li ul li::before { content: none; }
+
+.timeline .workstream { margin-top: 1.1rem; }
+.timeline .workstream:first-child { margin-top: .5rem; }
+.timeline .workstream h4 { margin: 0 0 .3rem; font-size: .95rem; font-weight: 600; color: var(--fg); }
+
+/* Label/value grid, e.g. the resume's skills breakdown */
+.spec-grid { display: grid; grid-template-columns: 140px 1fr; gap: .6rem 1.5rem; margin: 0 0 2.5rem; }
+.spec-grid dt { color: var(--fg-muted); font-size: .8rem; text-transform: uppercase; letter-spacing: .05em; padding-top: .15rem; }
+.spec-grid dd { margin: 0; color: var(--fg); }
+
+@media (max-width: 600px) {
+  .spec-grid { grid-template-columns: 1fr; gap: .15rem 0; }
+  .spec-grid dt { margin-top: .75rem; }
+}
+
+.disclosure-list { list-style: none; padding: 0; margin: 0 0 2.5rem; }
+.disclosure-list li { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; flex-wrap: wrap; padding: .75rem 0; border-bottom: 1px solid var(--border); }
+.disclosure-list li:last-child { border-bottom: none; }
+.disclosure-list .tag { font-size: .75rem; color: var(--fg-muted); white-space: nowrap; }
+
+.list-plain { padding-left: 1.2rem; color: var(--fg-muted); margin: 0 0 2.5rem; }
+.list-plain li { margin-bottom: .5rem; }
 
 .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; }
 .card { border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; background: var(--bg-alt); }
