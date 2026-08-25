@@ -3,7 +3,7 @@
   --bg-alt: #1a1a1a;
   --fg: #f5f5f5;
   --fg-muted: #b3b3b3;
-  --accent: #4f9dff;
+  --accent: #ef4444;
   --border: #2e2e2e;
   --radius: 8px;
   --max-width: 1100px;
@@ -55,8 +55,8 @@ body {
 .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
 
 .btn { display: inline-block; padding: .75rem 1.5rem; border-radius: var(--radius); text-decoration: none; font-weight: 600; font-size: .95rem; transition: transform .15s, background .15s, border-color .15s; }
-.btn-primary { background: var(--accent); color: #051225; }
-.btn-primary:hover { background: #6facff; }
+.btn-primary { background: var(--accent); color: #200404; }
+.btn-primary:hover { background: #f87171; }
 .btn-secondary { background: transparent; color: var(--fg); border: 1px solid var(--border); }
 .btn-secondary:hover { border-color: var(--fg-muted); }
 
