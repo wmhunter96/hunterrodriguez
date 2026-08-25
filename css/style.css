@@ -127,7 +127,10 @@ body {
 .print-header { display: none; }
 
 .page h2 { font-size: 1.4rem; margin: 0 0 1rem; padding-top: 2rem; border-top: 1px solid var(--border); }
-.page h2:first-of-type { border-top: none; padding-top: 0; }
+/* Each section is wrapped in .resume-block so print can reorder them (see
+   @media print); on screen Experience is always first, so it's the one
+   that should have no top border/padding, regardless of source order. */
+.resume-block--experience > h2 { border-top: none; padding-top: 0; }
 .page h3 { font-size: 1.05rem; margin: 0 0 .25rem; }
 .meta { color: var(--fg-muted); font-size: .85rem; margin: 0 0 .5rem; }
 
@@ -207,53 +210,150 @@ body {
 }
 
 /* Print (used by the resume's "Export to PDF" button, via window.print()).
-   Follows the plain, black-on-white, centered-header layout of the
-   reference paper resume: no site chrome, no accent color or timeline
-   rule/dots, plain bold section headings. Always omits the full-experience
-   entries, regardless of whether they're currently expanded. */
+   Matches the format of the reference Word resume (Resume.docx): Arial,
+   Letter page with .5in top / 1in other margins, centered plain name +
+   email header, plain bold black section labels (no border/accent/
+   uppercase), and real nested bullets (● level 0, ○ level 1, ■ level 2)
+   instead of the site's colored timeline rule/dots. Section order is
+   reordered to match the docx (Education, Skills, Awards, Invention
+   Disclosures, Experience last) via flex order, independent of the
+   on-screen order. Always omits the full-experience entries, regardless
+   of whether they're currently expanded. */
+/* Zero out the browser's own print margins so .page's padding below is the
+   only margin in effect — otherwise it stacks on top of whatever margin
+   the user's print dialog happens to be set to. */
+@page {
+  size: letter;
+  margin: 0;
+}
+
 @media print {
   :root {
     --bg: #ffffff;
     --bg-alt: #ffffff;
     --fg: #000000;
-    --fg-muted: #333333;
+    --fg-muted: #000000;
     --accent: #000000;
     --border: #cccccc;
   }
 
   body { background: #fff; }
+  body, .page { font-family: Arial, Helvetica, sans-serif; }
 
   .site-header,
   .site-footer,
   .page-actions,
-  .page-header-row { display: none !important; }
+  .page-header-row,
+  .page-intro { display: none !important; }
 
   .timeline .extra-experience { display: none !important; }
 
-  .page { padding: 1in .75in; max-width: none; }
+  .page { display: flex; flex-direction: column; padding: .5in 1in 1in; max-width: none; }
+  .resume-block--education   { order: 1; }
+  .resume-block--skills      { order: 2; }
+  .resume-block--awards      { order: 3; }
+  .resume-block--disclosures { order: 4; }
+  .resume-block--experience  { order: 5; }
+  /* Education prints first (order 1 above); drop the extra top gap the
+     general h2 rule below adds for every other section. */
+  .resume-block--education > h2 { margin-top: 0; }
 
   a { color: inherit; text-decoration: none; }
 
-  .print-header { display: block; text-align: center; margin-bottom: 1.5rem; }
-  .print-header h1 { font-size: 1.6rem; margin: 0 0 .25rem; }
-  .print-header a { color: #1155cc; text-decoration: underline; }
-
-  .page-intro { text-align: center; max-width: none; margin: 0 auto 2rem; }
+  .print-header { display: block; text-align: center; margin-bottom: 12pt; }
+  .print-header h1 { font-size: 16pt; font-weight: 700; margin: 0 0 4pt; }
+  .print-header p { font-size: 10pt; margin: 0; }
 
   .page h2 {
-    font-size: 1rem;
+    font-size: 10pt;
+    font-weight: 700;
     text-transform: none;
     border-top: none;
     padding-top: 0;
-    margin: 1.5rem 0 .5rem;
+    margin: 12pt 0 4pt;
   }
 
-  .timeline { border-left: none; margin-left: 0; }
-  .timeline li { padding-left: 0; }
-  .timeline li::before { content: none; }
+  /* Plain 9pt body text everywhere by default; specific elements below
+     layer on their bullet level and indent. */
+  .page h3, .meta, .page p, .edu p,
+  .timeline li ul li, .disclosure-list li, .list-plain li,
+  .spec-grid dt, .spec-grid dd {
+    font-size: 9pt;
+    font-weight: 400;
+    color: #000;
+  }
 
-  .disclosure-list li { border-bottom: none; padding: .15rem 0; }
+  .timeline { border-left: none; margin: 0; padding: 0; list-style: none; }
+  .timeline li { padding: 0; margin: 0 0 4pt; position: static; }
+  .timeline li::before { content: none; }
+  .timeline li ul { margin: 0; padding: 0; list-style: none; color: #000; }
+  .timeline li ul li { position: static; padding: 0; }
+  .timeline li ul li::before { content: none; }
+
+  /* Level 0 (●): job titles, school name, and this page's flat award/
+     disclosure lists — the reference resume's top-level bullets. */
+  .timeline > li > h3,
+  .edu > h3,
+  .disclosure-list li,
+  .list-plain li {
+    font-weight: 400;
+    padding-left: .5in;
+    text-indent: -.25in;
+    margin: 0;
+  }
+  .timeline > li > h3::before,
+  .edu > h3::before,
+  .disclosure-list li::before,
+  .list-plain li::before { content: "\25CF  "; }
   .disclosure-list .tag { display: none; }
+
+  /* Date/meta line: a continuation of the level-0 line above it, not its
+     own bullet — aligned under that line's text, not its bullet glyph. */
+  .meta, .timeline .meta {
+    padding-left: .5in;
+    text-indent: 0;
+    margin: 0 0 2pt;
+  }
+
+  /* Level 1 (○): workstream categories, bullets with no workstream
+     wrapper, and the education coursework line. */
+  .timeline .workstream h4,
+  .timeline > li > ul > li,
+  .edu > p:not(.meta) {
+    font-weight: 400;
+    padding-left: 1in;
+    text-indent: -.25in;
+    margin: 0 0 2pt;
+  }
+  .timeline .workstream h4::before,
+  .timeline > li > ul > li::before,
+  .edu > p:not(.meta)::before { content: "\25CB  "; }
+
+  /* Level 2 (■): specific bullets nested inside a workstream category. */
+  .timeline .workstream > ul > li {
+    padding-left: 1.5in;
+    text-indent: -.25in;
+    margin: 0 0 2pt;
+  }
+  .timeline .workstream > ul > li::before { content: "\25A0  "; }
+
+  /* Skills grid -> flat "Category: items" bulleted lines, like the docx. */
+  .spec-grid { display: block; margin: 0; }
+  .spec-grid dt {
+    display: block;
+    text-transform: none;
+    letter-spacing: normal;
+    font-weight: 700;
+    padding-left: .5in;
+    text-indent: -.25in;
+    margin: 0;
+  }
+  .spec-grid dt::before { content: "\25CF  "; font-weight: 400; }
+  .spec-grid dt::after { content: ": "; font-weight: 400; }
+  .spec-grid dd { display: inline; margin: 0; font-weight: 400; }
+
+  .disclosure-list, .list-plain { list-style: none; margin: 0 0 4pt; padding: 0; }
+  .disclosure-list li { display: block; border-bottom: none; }
 
   .card, .skill-tags li { border: none; background: none; padding: 0; }
 }
