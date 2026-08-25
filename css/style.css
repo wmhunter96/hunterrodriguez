@@ -40,7 +40,7 @@ body {
 .nav-toggle span { width: 22px; height: 2px; background: var(--fg); display: block; }
 
 /* Hero */
-.hero { background: linear-gradient(to left, #000000 0%, #2b2b2b 100%); padding: 4rem 0; }
+.hero { background: linear-gradient(to right, #000000 0%, #2b2b2b 100%); padding: 4rem 0; }
 .hero-inner {
   display: flex;
   align-items: stretch;
