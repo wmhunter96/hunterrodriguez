@@ -126,6 +126,10 @@ body {
 .timeline .workstream:first-child { margin-top: .5rem; }
 .timeline .workstream h4 { margin: 0 0 .3rem; font-size: .95rem; font-weight: 600; color: var(--fg); }
 
+.timeline .extra-experience h3,
+.timeline .extra-experience .meta { color: var(--fg-muted); }
+.timeline .extra-experience::before { background: var(--fg-muted); }
+
 /* Label/value grid, e.g. the resume's skills breakdown */
 .spec-grid { display: grid; grid-template-columns: 140px 1fr; gap: .6rem 1.5rem; margin: 0 0 2.5rem; }
 .spec-grid dt { color: var(--fg-muted); font-size: .8rem; text-transform: uppercase; letter-spacing: .05em; padding-top: .15rem; }

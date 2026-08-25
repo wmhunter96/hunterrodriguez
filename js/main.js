@@ -13,3 +13,17 @@ if (navToggle && navLinks) {
     navToggle.setAttribute('aria-expanded', String(isOpen));
   });
 }
+
+// Expandable full experience section on the resume page
+var toggleExperience = document.getElementById('toggleExperience');
+var extraExperience = document.querySelectorAll('.extra-experience');
+if (toggleExperience && extraExperience.length) {
+  toggleExperience.addEventListener('click', function () {
+    var isExpanded = toggleExperience.getAttribute('aria-expanded') === 'true';
+    extraExperience.forEach(function (el) {
+      el.hidden = isExpanded;
+    });
+    toggleExperience.setAttribute('aria-expanded', String(!isExpanded));
+    toggleExperience.textContent = isExpanded ? 'Show full experience' : 'Show less';
+  });
+}
