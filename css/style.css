@@ -43,10 +43,9 @@ body {
 .hero { background: linear-gradient(to left, #000000 0%, #2b2b2b 100%); padding: 4rem 0; }
 .hero-inner {
   display: flex;
-  align-items: center;
+  align-items: stretch;
   justify-content: space-between;
   gap: 3rem;
-  min-height: 55vh;
   flex-wrap: wrap;
 }
 .hero-text { flex: 1 1 320px; }
@@ -61,14 +60,19 @@ body {
 .btn-secondary { background: transparent; color: var(--fg); border: 1px solid var(--border); }
 .btn-secondary:hover { border-color: var(--fg-muted); }
 
-.hero-photo { flex: 1 1 280px; display: flex; justify-content: center; }
+/* Photo is sized to match the height of .hero-text (name/title/blurb/buttons)
+   via flex stretch. The img is positioned absolutely so its own intrinsic
+   size never affects that stretch height — it just fills whatever height
+   .hero-photo ends up with, at its natural (uncropped) aspect ratio. */
+.hero-photo { flex: 1 1 280px; position: relative; display: flex; justify-content: center; }
 .hero-photo img {
-  width: min(320px, 80vw);
-  aspect-ratio: 4 / 5;
-  object-fit: cover;
-  border-radius: var(--radius);
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
   display: block;
-  border: 1px solid var(--border);
 }
 .photo-placeholder {
   width: min(320px, 80vw);
@@ -165,4 +169,14 @@ body {
     display: none;
   }
   .nav-links.open { display: flex; }
+
+  /* Hero stacks here, so there's no sibling height for the photo to
+     stretch to — fall back to sizing it by its own natural aspect ratio. */
+  .hero-photo { position: static; }
+  .hero-photo img {
+    position: static;
+    height: auto;
+    width: min(320px, 80vw);
+    max-width: 100%;
+  }
 }
